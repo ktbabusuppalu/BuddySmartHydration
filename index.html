@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buddy's Smart Hydration & ScientistKTBsyntax</title>
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #4cc9f0;
+            --accent: #f72585;
+            --bg: #f0f7ff;
+            --card-bg: #ffffff;
+            --text: #2b2d42;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #b5e2fa, #f7d6e0);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background: var(--card-bg);
+            width: 100%;
+            max-width: 650px;
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+            border: 4px solid #fff;
+        }
+        h1 {
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 5px;
+            font-size: 26px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #7209b7;
+            font-size: 15px;
+            margin-bottom: 25px;
+            font-weight: bold;
+        }
+        .form-group {
+            margin-bottom: 18px;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 6px;
+            color: #3f37c9;
+        }
+        select, input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #b5e2fa;
+            border-radius: 12px;
+            font-size: 16px;
+            box-sizing: border-box;
+            background-color: #fdfdfd;
+        }
+        button {
+            background: linear-gradient(135deg, #4361ee, #7209b7);
+            color: white;
+            border: none;
+            padding: 16px;
+            width: 100%;
+            border-radius: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.4);
+            transition: 0.2s;
+        }
+        button:hover {
+            transform: scale(1.02);
+        }
+        .login-section, .app-content {
+            display: none;
+        }
+        .active {
+            display: block;
+        }
+        .tank-container {
+            margin-top: 25px;
+            background: #e9ecef;
+            border-radius: 15px;
+            height: 40px;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            border: 3px solid #4361ee;
+            display: none;
+        }
+        .tank-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #4cc9f0, #4361ee);
+            transition: width 0.8s ease-in-out;
+        }
+        .tank-text {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        .result-card {
+            margin-top: 20px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            display: none;
+            border: 2px dashed #4cc9f0;
+        }
+        .mascot-speech {
+            font-size: 16px;
+            color: #3a0ca3;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .streak-box {
+            background: #e0fbfc;
+            padding: 10px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: bold;
+            color: #0077b6;
+        }
+        .info-menu-box {
+            margin-bottom: 20px;
+            background: #f8f9fa;
+            border: 2px solid #b5e2fa;
+            border-radius: 12px;
+            padding: 15px;
+        }
+        .info-content {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #495057;
+            line-height: 1.5;
+            background: #ffffff;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #ced4da;
+            display: none;
+        }
+        .hint {
+            font-size: 12px;
+            color: #6c757d;
+            margin-top: 5px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🚀 Buddy's Water Mission</h1>
+    <div class="subtitle">Secure Menu-Based Hydration & scientistKTBsyntax</div>
+
+    <!-- Login Section with automatic DDMM passcode -->
+    <div id="loginSection" class="active">
+        <div class="form-group">
+            <label for="passCode">Enter shared 4-Digit Security Code:</label>
+            <input type="password" id="passCode" maxlength="4" placeholder="••••">
+            <div class="hint">Passcode changes daily</div>
+        </div>
+        <button onclick="verifyPassword()">Unlock Portal</button>
+        <div id="loginError" style="color: #f72585; margin-top: 10px; font-weight: bold; text-align: center;"></div>
+    </div>
+
+    <!-- Main Application Content -->
+    <div id="appContent" class="app-content">
+        
+        <!-- Interactive Information Menu Option -->
+        <div class="info-menu-box">
+            <label for="infoSelect">📖 Research & Science Viewer Menu:</label>
+            <select id="infoSelect" onchange="displayInfoMessage()">
+                <option value="">-- Select a topic to read --</option>
+                <option value="science">1. The Science of Food vs. Water Calculations</option>
+                <option value="digestion">2. How Less Water Causes Stomach Issues</option>
+                <option value="children">3. Why Visual Data Works Best for Children</option>
+            </select>
+            <div id="infoDisplayBox" class="info-content"></div>
+        </div>
+
+        <div class="streak-box">🔥 Daily Streak: <span id="streakCount">1</span> Supercharged Day!</div>
+
+        <div class="form-group">
+            <label for="categorySelect">1. Select Food Category:</label>
+            <select id="categorySelect" onchange="updateFoodList()">
+                <option value="nonveg">I. LIST OF NON-VEGANS[cite: 1]</option>
+                <option value="vegan">II. LIST OF VEGANS</option>
+                <option value="greens">III. LIST OF LEAF GREENS</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="foodItemSelect">2. Select Specific Dish:</label>
+            <select id="foodItemSelect"></select>
+        </div>
+
+        <div class="form-group">
+            <label for="foodCount">3. How many portions/pieces?</label>
+            <select id="foodCount">
+                <option value="1">1 piece</option>
+                <option value="2">2 pieces</option>
+                <option value="3" selected>3 pieces (Standard)</option>
+                <option value="4">4 pieces</option>
+                <option value="5">5 pieces</option>
+                <option value="6">6 pieces</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="bladderStatus">4. How does your tummy/bladder feel right now?</label>
+            <select id="bladderStatus">
+                <option value="1">Light / Ready to play!</option>
+                <option value="2" selected>Normal / Comfortable</option>
+                <option value="3">Full / Need a bathroom break first</option>
+            </select>
+        </div>
+
+        <button onclick="calculateHydration()">Calculate My Water Superpower! 💧</button>
+
+        <div class="tank-container" id="tankContainer">
+            <div class="tank-fill" id="tankFill"></div>
+            <div class="tank-text" id="tankText">0 ml</div>
+        </div>
+
+        <div class="result-card" id="resultCard">
+            <div id="recWater" style="font-size: 22px; color: #4361ee; font-weight: bold;"></div>
+            <div class="mascot-speech" id="actionAdvice"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+const foodDatabase = {
+    nonveg: [
+        {name: "Butter Chicken", mult: 0.50},
+        {name: "Chettinad Pepper Chicken", mult: 0.85},
+        {name: "Chicken Biriyani", mult: 0.75},
+        {name: "Chicken Fried Rice", mult: 0.80},
+        {name: "Chicken Gravy or Kari", mult: 0.50},
+        {name: "Chicken noodles", mult: 0.75},
+        {name: "Chicken Pizza", mult: 0.85},
+        {name: "Chicken Zinger Burger", mult: 0.85},
+        {name: "Chilly Chicken", mult: 0.85},
+        {name: "Crispy Chicken Strips", mult: 0.85},
+        {name: "Egg Omelet", mult: 0.70},
+        {name: "Fish Curry", mult: 0.50},
+        {name: "Fish Fry or Fish Fingers", mult: 0.80},
+        {name: "Fish Tikka", mult: 0.80},
+        {name: "Fried Prawns", mult: 0.80},
+        {name: "Hot and Crispy Chicken", mult: 0.85},
+        {name: "Hot Chicken Wings", mult: 0.85},
+        {name: "Lamb Fry or Chop", mult: 0.85},
+        {name: "Mughlai Egg Curry", mult: 0.50},
+        {name: "Mutton Biriyani", mult: 0.85},
+        {name: "Mutton Cutlet", mult: 0.80},
+        {name: "Mutton Gravy or Kari", mult: 0.50},
+        {name: "Pepper Chicken", mult: 0.85},
+        {name: "Reshmi or Silk Chicken", mult: 0.55},
+        {name: "Tandoori Chicken", mult: 0.80}
+    ],
+    vegan: [
+        {name: "Aloo Paratha with Butter", mult: 0.75},
+        {name: "Ash Gourd Fry", mult: 0.40},
+        {name: "Banana Flower Fry", mult: 0.50},
+        {name: "Banana Fry", mult: 0.60},
+        {name: "Banana Stem Fry", mult: 0.40},
+        {name: "Beans Fry", mult: 0.40},
+        {name: "Bell Pepper Fry", mult: 0.40},
+        {name: "Bisi Bele Bath", mult: 0.40},
+        {name: "Bittergourd Spicy Fry", mult: 0.50},
+        {name: "Bottle Gourd Stir Fry", mult: 0.35},
+        {name: "Garlic Lemon Broccoli", mult: 0.40},
+        {name: "Butter Kulcha", mult: 0.70},
+        {name: "Cabbage Fry", mult: 0.40},
+        {name: "Cauliflower Fry", mult: 0.45},
+        {name: "Chappathis", mult: 0.75},
+        {name: "Curd Rice", mult: 0.15},
+        {name: "Dal Tadka with Basmati Rice", mult: 0.45},
+        {name: "Drumstick and Brinjal Gravy", mult: 0.45},
+        {name: "Idli", mult: 0.30},
+        {name: "Kadai Paneer", mult: 0.50},
+        {name: "Kichadi", mult: 0.35},
+        {name: "Lemon Rice", mult: 0.40},
+        {name: "Malai Kofta", mult: 0.55},
+        {name: "Masala Dosa", mult: 0.60},
+        {name: "Matar Paneer", mult: 0.50},
+        {name: "MEALS", mult: 0.45},
+        {name: "Naan (2 Pieces)", mult: 0.75},
+        {name: "Onion Uthappam", mult: 0.50},
+        {name: "Palak Paneer", mult: 0.45},
+        {name: "Pasta (Tomato Herb Penne)", mult: 0.50},
+        {name: "Vermicelli Payasam (Semiya Kheer)", mult: 0.20},
+        {name: "Phulkas (4 Pieces)", mult: 0.75},
+        {name: "Plain Dosa", mult: 0.55},
+        {name: "Pongal (Ven Pongal)", mult: 0.30},
+        {name: "Veg Pulao", mult: 0.40},
+        {name: "Pumpkin Fry (Kaddu ki Sabzi)", mult: 0.40},
+        {name: "Puri (3 Pieces)", mult: 0.80},
+        {name: "Puttu & Kadala Curry", mult: 0.65},
+        {name: "Rajma Curry (Kidney Bean Curry)", mult: 0.50},
+        {name: "Rava Dosa", mult: 0.60},
+        {name: "Sambar Rice (Bisi Bele Bath style)", mult: 0.35},
+        {name: "Set Dosa (3 Pieces)", mult: 0.50},
+        {name: "Snake Gourd Fry", mult: 0.35},
+        {name: "Sweet Pongal", mult: 0.30},
+        {name: "Tandoori Roti", mult: 0.75},
+        {name: "Tomato Rice (Thakkali Sadham)", mult: 0.40},
+        {name: "Turnip (Roasted)", mult: 0.40},
+        {name: "Rava Uppuma", mult: 0.40},
+        {name: "Veg Biriyani", mult: 0.45},
+        {name: "Veg Fried Rice", mult: 0.50},
+        {name: "Vegetable Kurma", mult: 0.45}
+    ],
+    greens: [
+        {name: "Agathi Hummingbird Leaf Curry", mult: 0.60},
+        {name: "Arugula Rocket Leaf Fry", mult: 0.60},
+        {name: "Chakravarthy Leaf Curry", mult: 0.60},
+        {name: "Collard Greens Fry", mult: 0.60},
+        {name: "Curry Leaf Powder", mult: 0.80},
+        {name: "Drumstick Leaf Curry", mult: 0.60},
+        {name: "Fenugreek Leaf Curry", mult: 0.60},
+        {name: "Gongura Rosella Pachadi", mult: 0.50},
+        {name: "Green Amaranth Pigweed Leaf Curry", mult: 0.60},
+        {name: "Kale Fry", mult: 0.60},
+        {name: "Lesser White Amaranth Mulai Leaf Curry", mult: 0.60},
+        {name: "Manathakkali Black Nightshade Leaf Curry", mult: 0.60},
+        {name: "Mustard Green Fry", mult: 0.60},
+        {name: "Palak Indian Spinach Curry", mult: 0.60},
+        {name: "Ponnaganti Dwarf Copperleaf Curry", mult: 0.60},
+        {name: "Purple Red Amaranth Leaf Curry", mult: 0.60},
+        {name: "Radish Leaf Curry", mult: 0.60},
+        {name: "Red Green Chinese Amaranth Leaf Curry", mult: 0.60},
+        {name: "Spinach Fry", mult: 0.60},
+        {name: "Spleen Amaranth Arai Leaf Curry", mult: 0.60},
+        {name: "Swiss Chard Leaf Fry", mult: 0.60},
+        {name: "Watercress Leaf Fry", mult: 0.60}
+    ]
+};
+
+const infoMessages = {
+    science: "The mathematical formula links a 150ml baseline metabolic window with food mass and specific item multipliers. Dry items (like chappathis or biriyani) demand higher systemic water for enzymatic breakdown, whereas soupy or high-moisture foods require much less supplemental water.",
+    digestion: "Insufficient water intake directly compromises digestion. Without adequate internal fluids relative to food volume, the GI tract struggles to break down food efficiently, triggering bloating, sluggish nutrient absorption, and harder stools leading to constipation.",
+    children: "Children respond far better to transparent visual calculation and interactive data tanks than to forced mandates or nagging. Seeing their custom water target fill a graphic tank helps build intuitive, healthy self-awareness."
+};
+
+function getTodayPassword() {
+    const now = new Date();
+    const day = String(now.getDate()).padStart(2, '0');
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    return day + month; 
+}
+
+function verifyPassword() {
+    const inputVal = document.getElementById('passCode').value.trim();
+    const correctPass = getTodayPassword();
+
+    if (inputVal === correctPass) {
+        document.getElementById('loginSection').classList.remove('active');
+        document.getElementById('appContent').classList.add('active');
+        updateFoodList();
+    } else {
+        document.getElementById('loginError').innerText = "Incorrect code! Use today's date digits (DDMM format).";
+    }
+}
+
+function displayInfoMessage() {
+    const selectedVal = document.getElementById('infoSelect').value;
+    const displayBox = document.getElementById('infoDisplayBox');
+    
+    if (selectedVal && infoMessages[selectedVal]) {
+        displayBox.innerText = infoMessages[selectedVal];
+        displayBox.style.display = 'block';
+    } else {
+        displayBox.style.display = 'none';
+    }
+}
+
+function updateFoodList() {
+    const cat = document.getElementById('categorySelect').value;
+    const itemSelect = document.getElementById('foodItemSelect');
+    itemSelect.innerHTML = '';
+    
+    foodDatabase[cat].forEach(item => {
+        let opt = document.createElement('option');
+        opt.value = JSON.stringify(item);
+        opt.text = item.name;
+        itemSelect.appendChild(opt);
+    });
+}
+
+function calculateHydration() {
+    const itemData = JSON.parse(document.getElementById('foodItemSelect').value);
+    const count = parseInt(document.getElementById('foodCount').value);
+    const bladderStatus = parseInt(document.getElementById('bladderStatus').value);
+    
+    let totalGrams = count * 60; 
+    let baseWindowWater = 150;
+    let foodWaterNeed = totalGrams * itemData.mult;
+    let totalCalculated = baseWindowWater + foodWaterNeed;
+    let advice = "";
+
+    if (bladderStatus === 3) {
+        totalCalculated = 40;
+        advice = "🛡️ Your tank is already full! Take tiny sips over the next 2 hours after a quick trip to the restroom.";
+    } else if (bladderStatus === 2) {
+        totalCalculated = Math.min(totalCalculated, 250);
+        advice = "⭐ Great balance! Sip this water slowly while focusing or playing.";
+    } else {
+        advice = "🚀 Perfect! Drink this water amount over the next 2 hours to keep your brain super sharp!";
+    }
+
+    let finalMl = Math.round(totalCalculated);
+    
+    document.getElementById('tankContainer').style.display = 'block';
+    let fillPercent = Math.min((finalMl / 350) * 100, 100);
+    document.getElementById('tankFill').style.width = fillPercent + '%';
+    document.getElementById('tankText').innerText = finalMl + ' ml target';
+
+    document.getElementById('recWater').innerText = "Target for next 2 hours: " + finalMl + " ml";
+    document.getElementById('actionAdvice').innerHTML = advice;
+    document.getElementById('resultCard').style.display = 'block';
+}
+</script>
+
+</body>
+</html>
