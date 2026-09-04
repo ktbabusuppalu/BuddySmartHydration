@@ -170,12 +170,12 @@
     <h1>🚀 Buddy's Water Mission</h1>
     <div class="subtitle">Secure Menu-Based Hydration & scientistKTBsyntax</div>
 
-    <!-- Login Section with automatic DDMM passcode -->
+    <!-- Login Section with fixed secret passcode -->
     <div id="loginSection" class="active">
         <div class="form-group">
-            <label for="passCode">Enter shared 4-Digit Security Code:</label>
-            <input type="password" id="passCode" maxlength="4" placeholder="••••">
-            <div class="hint">Passcode changes daily</div>
+            <label for="passCode">Enter Secret Access Code:</label>
+            <input type="password" id="passCode" placeholder="Enter password">
+            <div class="hint">Restricted access portal for invited parents</div>
         </div>
         <button onclick="verifyPassword()">Unlock Portal</button>
         <div id="loginError" style="color: #f72585; margin-top: 10px; font-weight: bold; text-align: center;"></div>
@@ -361,23 +361,16 @@ const infoMessages = {
     children: "Children respond far better to transparent visual calculation and interactive data tanks than to forced mandates or nagging. Seeing their custom water target fill a graphic tank helps build intuitive, healthy self-awareness."
 };
 
-function getTodayPassword() {
-    const now = new Date();
-    const day = String(now.getDate()).padStart(2, '0');
-    const month = String(now.getMonth() + 1).padStart(2, '0');
-    return day + month; 
-}
-
 function verifyPassword() {
     const inputVal = document.getElementById('passCode').value.trim();
-    const correctPass = getTodayPassword();
+    const correctPass = "Scientist2026"; // Secure fixed password for invited users
 
     if (inputVal === correctPass) {
         document.getElementById('loginSection').classList.remove('active');
         document.getElementById('appContent').classList.add('active');
         updateFoodList();
     } else {
-        document.getElementById('loginError').innerText = "Incorrect code! Use today's date digits (DDMM format).";
+        document.getElementById('loginError').innerText = "Incorrect code! Please use the authorized access code.";
     }
 }
 
